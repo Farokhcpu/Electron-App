@@ -1,6 +1,7 @@
 {
   "name": "electron-app",
   "productName": "electron-app",
+  "author": "fafar",
   "description": "There is no description",
   "homepage": "https://github.com/Farokhcpu/Electron-App/"
 }
