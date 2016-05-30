@@ -11,10 +11,11 @@
     "grunt": "~0.4.5",
     "grunt-ts": "5.5.0-beta.2",
     "grunt-cli": "*",
-    "grunt-electron-builder": "*",
+    "electron-builder": "*",
     "grunt-electron":"*",
     "electron-packager": "*",
-    "grunt-contrib-copy": "*"
+    "grunt-contrib-copy": "*",
+    "npm-run-script": "*"
 
   },
   "build": {
@@ -34,11 +35,14 @@
   "directories": {
     "buildResources": "./build",
     "output": "./dist",
-    "app": "./dist/app"
-  }
-  "scripts": {
-    "start": "electron main.js"
+    "app": "./app"
   },
-  "author": "Knight",
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "pack": "build --target dir",
+    "dist": "build"
+  },
+
+  "author": "fafar",
   "license": "ISC"
 }
