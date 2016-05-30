@@ -11,13 +11,31 @@
     "grunt": "~0.4.5",
     "grunt-ts": "5.5.0-beta.2",
     "grunt-cli": "*",
-    "grunt-auto-install": "*",
+    "grunt-electron-builder": "*",
     "grunt-electron":"*",
     "electron-packager": "*",
     "grunt-contrib-copy": "*"
 
+  },
+  "build": {
+    "app-bundle-id": "farokh.fafar",
+    "app-cetegory-type": "public.app-category.developer-tools",
+    "productName": "electron-app",
+    "compression": "maximum",
+    "win" : {
+      "iconUrl": "https://github.com/Farokhcpu/Electron-App/blob/master/icon.ico"
+    },
+    "osx": {
+      "target": "dmg"
+      
+    }
 
   },
+  "directories": {
+    "buildResources": "./build",
+    "output": "./dist",
+    "app": "./dist/app"
+  }
   "scripts": {
     "start": "electron main.js"
   },
