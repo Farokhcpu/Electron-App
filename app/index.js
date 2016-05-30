@@ -1,34 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
+var app = require('app');  // Module to control application life.
+var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var electron = require('electron');
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+var mainWindow = null;
 
-    <title>Tutorialzine Electron Experiment</title>
+// Quit when all windows are closed.
+app.on('window-all-closed', function() {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform != 'darwin') {
+    app.quit();
+  }
+});
 
-    <link rel="stylesheet" href="./css/jquery.flipster.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
-    <style> 
-	p {
-		font-size: 500%;
-	}
-    </style>
-</head>
-<body>
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+app.on('ready', function() {
+  // Create the browser window.
+  mainWindow = new BrowserWindow({width: 1000, height: 625});
 
-<p>This is version 1</p>
-<!--
-<div class="flipster">
-    <ul>
-    </ul>
-</div>
+  // and load the index.html of the app.
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-<p class="stats"></p>
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function() {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null;
+  });
 
-<script>window.$ = window.jQuery = require('./js/jquery.min.js');</script>
-<script src="./js/jquery.flipster.min.js"></script>
-<script src="./js/script.js"></script>
--->
-</body>
-</html>
+  electron.autoUpdater.setFeedURL("http://192.168.1.67/download/latest/");
+  electron.autoUpdater.checkForUpdates(function() {
+    electron.autoUpdater.on('update-downloaded', function() {
+      electron.autoUpdater.quitAndInstall();
+    });
+  });
+
+
+});
